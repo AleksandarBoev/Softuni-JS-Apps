@@ -1,4 +1,6 @@
 const doStuff = (() => {
+    localStorage.removeItem('authToken');
+
     const elements = {
         //get
         buttonGetBooks: document.getElementById('get-books'),
@@ -17,6 +19,10 @@ const doStuff = (() => {
         inputIsbnUpdate: document.getElementById('isbn-update'),
         inputUpdateId: document.getElementById('update-id'),
         buttonUpdate: document.getElementById('update-btn'),
+        //login logout
+        buttonLogin: document.getElementById('login'),
+        buttonPostCustom: document.getElementById('post-custom-object'),
+        buttonLogout: document.getElementById('logout'),
     };
 
     const baseUrl = 'https://baas.kinvey.com/appdata';
@@ -92,6 +98,68 @@ const doStuff = (() => {
             method: 'PUT',
             headers: headersObj,
             body: JSON.stringify(updatedBook),
+        })
+    });
+
+    elements.buttonLogin.addEventListener('click', () => {
+        const username = 'guest';
+        const password = 'guest';
+        const loginUrl = `https://baas.kinvey.com/user/${appKey}/login`;
+        const bodyLogin = {
+            username,
+            password,
+        };
+
+        fetch(loginUrl, {
+            method: 'POST',
+            headers: {
+                credentials: 'include',
+                'Content-Type': 'application/json',
+                Authorization: 'Basic ' + btoa(`${username}:${password}`),
+            },
+            body: JSON.stringify(bodyLogin),
+        }).then(response => response.json()
+        ).then(jsonResponse => {
+            console.log(jsonResponse);
+            localStorage.setItem('authToken', jsonResponse._kmd.authtoken);
+            console.log('Login successful! Current auth token: ' + jsonResponse._kmd.authtoken);
+        }).catch(err => console.error(err));
+    });
+
+    elements.buttonPostCustom.addEventListener('click', () => {
+        const customObj = {
+            title: 'Some title',
+            author: 'Some author',
+            isbn: 'Some isbn',
+        };
+
+        const postUrl = `${baseUrl}/${appKey}/${collectionName}`;
+        fetch(postUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                credentials: 'include',
+                Authorization: 'Kinvey ' + localStorage.getItem('authToken'),
+            },
+            body: JSON.stringify(customObj),
+        }).then(response => {
+            if (response.status === 401) {
+                throw Error('Unauthorized entry! Stahp!');
+            }
+        }).catch(err => console.log(err.message));
+    });
+
+    elements.buttonLogout.addEventListener('click', () => {
+        const url = `https://baas.kinvey.com/user/${appKey}/_logout`;
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Kinvey ' + localStorage.getItem('authToken'),
+            }
+        }).then(response => {
+            console.log(response);
         })
     })
 
