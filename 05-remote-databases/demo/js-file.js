@@ -23,6 +23,8 @@ const doStuff = (() => {
         buttonLogin: document.getElementById('login'),
         buttonPostCustom: document.getElementById('post-custom-object'),
         buttonLogout: document.getElementById('logout'),
+        buttonGetBooksAuth: document.getElementById('get-books-auth'),
+        ulAllBooksAuth: document.getElementById('all-books-auth'),
     };
 
     const baseUrl = 'https://baas.kinvey.com/appdata';
@@ -161,6 +163,38 @@ const doStuff = (() => {
         }).then(response => {
             console.log(response);
         })
-    })
+    });
+
+    elements.buttonGetBooksAuth.addEventListener('click', () => {
+        elements.ulAllBooksAuth.innerHTML = ''; //empty it
+
+        fetch(`${baseUrl}/${appKey}/${collectionName}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Kinvey ' + localStorage.getItem('authToken'),
+                credentials: "include",
+            },
+        })
+            .then(response => {
+                if (response.status >= 400) {
+                    throw Error('Auth token is missing or invalid! It could be invalid if: you logged out or too much time has passed');
+                }
+
+                return response.json();
+            })
+            .then(arrayOfBooks => {
+                const fragment = document.createDocumentFragment();
+
+                for (const book of arrayOfBooks) {
+                    const text = `Title: ${book.title} | Author: ${book.author} | ISBN: ${book.isbn} | Entity id: ${book._id}`;
+                    const newLiElement = document.createElement('li');
+                    newLiElement.textContent = text;
+                    fragment.appendChild(newLiElement);
+                }
+
+                elements.ulAllBooksAuth.appendChild(fragment);
+            }).catch(err => console.log(err.message));
+    });
 
 })();
