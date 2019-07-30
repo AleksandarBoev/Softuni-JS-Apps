@@ -1,0 +1,18 @@
+{{#if cats}}
+    <ul>
+        {{#each cats}}
+            <li>
+                <img src="{{imageLocation}}" width="250" height="250" alt="Card image cap">
+                <div class="info">
+                    <button class="showBtn">Show status code</button>
+                    <div class="status" id="{{id}}" style="display: none">
+                        <h4>Status Code: {{statusCode}}</h4>
+                        <p>{{statusMessage}}</p>
+                    </div>
+                </div>
+            </li>
+        {{/each}}
+    </ul>
+{{else}}
+    <h1>No cats. Sorry</h1>
+{{/if}}

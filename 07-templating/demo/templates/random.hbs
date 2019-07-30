@@ -1,0 +1,9 @@
+<ul>
+    {{#each contacts}}
+        <li>{{> contact-template}}</li>
+    {{else}}
+    <li>NOTHING</li>
+    {{/each}}
+
+</ul>
+<button onclick="consolePrint()">Click me!</button>
