@@ -1,5 +1,4 @@
-const sammyApp = Sammy('#root', function () {
-    //Note: paths to .hbs files depend on where the html file (which uses the js file) is located, not the js file itself!
+const controllerLib = (() => {
     const fromHtmlToHbsFolderPath = './handlebar-files/';
     const hbsFilePaths = {
         header: fromHtmlToHbsFolderPath + 'common/header.hbs',
@@ -14,8 +13,6 @@ const sammyApp = Sammy('#root', function () {
         login: fromHtmlToHbsFolderPath + 'forms/sign-in.hbs',
     };
 
-    this.use('Handlebars', 'hbs');
-
     function loadPage(mainPartialPath, context = {}) {
         this.loadPartials({
             headerPartial: hbsFilePaths.header,
@@ -28,38 +25,20 @@ const sammyApp = Sammy('#root', function () {
         });
     }
 
-    function isLoggedIn() {
-        return sessionStorage.getItem('authToken') !== undefined
-            && sessionStorage.getItem('authToken') !== null;
-    }
-
-    function redirectIfNotLoggedIn() {
-        if (!isLoggedIn()) {
-            this.redirect('#/home');
-        }
-    }
-
-    function redirectIfLoggedIn() { //TODO fix this
-        if (isLoggedIn()) {
-            this.redirect('#/home');
-            return true;
-        }
-    }
-
-    this.get('#/home', function () {
+    const getHome = context => {
         kinveyRequester.sendGetRequestWithAuthToken()
             .then(response => response.json())
             .then(responseJson => {
                 console.log(responseJson);
-                loadPage.call(this, hbsFilePaths.homeLoggedIn, {events: responseJson});
+                loadPage.call(context, hbsFilePaths.homeLoggedIn, {events: responseJson});
             });
-    });
+    };
 
-    this.get('#/event_details/:eventId', function () {
+    const getEventDetails = context => {
         kinveyRequester.sendGetRequestWithAuthToken()
             .then(response => response.json())
             .then(jsonData => {
-                const eventId = this.params.eventId;
+                const eventId = context.params.eventId;
 
                 const currentEvent = jsonData.filter(ev => ev._id === eventId)[0];
 
@@ -67,20 +46,22 @@ const sammyApp = Sammy('#root', function () {
                 const currentEventCreatorId = currentEvent._acl.creator;
 
                 if (currentEvent._acl.creator === currentUserId) {
-                    loadPage.call(this, hbsFilePaths.eventDetails, {isCreator: true, currentEvent})
+                    loadPage.call(context, hbsFilePaths.eventDetails, {isCreator: true, currentEvent})
                 } else {
-                    loadPage.call(this, hbsFilePaths.eventDetails, {isCreator: false, currentEvent})
+                    loadPage.call(context, hbsFilePaths.eventDetails, {isCreator: false, currentEvent})
                 }
             })
-    });
+    };
 
-    this.get('#/login', function () {
-        loadPage.call(this, hbsFilePaths.login, {loggedIn: false});
-    });
+    const getLogin = context => {
+        loadPage.call(context, hbsFilePaths.login, {loggedIn: false});
+    };
 
-    this.post('#/login', function () {
-        const username = this.params.username;
-        const password = this.params.password;
+    const postLogin = context => {
+        console.log('Trying to get the username!');
+        const username = context.params.username;
+        console.log('Got the username!');
+        const password = context.params.password;
 
         kinveyRequester.sendLoginRequest(username, password)
             .then(response => {
@@ -94,63 +75,63 @@ const sammyApp = Sammy('#root', function () {
             sessionStorage.setItem('username', responseData.username);
             sessionStorage.setItem('authToken', responseData._kmd.authtoken);
             sessionStorage.setItem('userId', responseData._id);
-            this.redirect('#/home');
+            context.redirect('#/home');
         }).catch(error => {
             console.log(error.message);
         });
-    });
+    };
 
-    this.get('#/register', function () {
-        loadPage.call(this, hbsFilePaths.register);
-    });
+    const getRegister = context => {
+        loadPage.call(context, hbsFilePaths.register);
+    };
 
-    this.post('#/register', function () {
-        const username = this.params.username;
-        const password = this.params.password;
-        const rePassword = this.params.rePassword;
+    const postRegister = context => {
+        const username = context.params.username;
+        const password = context.params.password;
+        const rePassword = context.params.rePassword;
 
         if (username.length < 3) {
             console.log('longer username pls');
-            this.redirect('#/register');
+            context.redirect('#/register');
             return;
         }
 
         if (password.length < 6) {
             console.log('password is too short!');
-            this.redirect('#/register');
+            context.redirect('#/register');
             return;
         }
 
         if (password !== rePassword) {
             console.log('passwords do NOT match!');
-            this.redirect('#/register');
+            context.redirect('#/register');
             return;
         }
 
         kinveyRequester.sendRegisterUserRequest(username, password)
             .then(response => {
                 console.log(response.statusCode);
-                this.redirect('#/home');
+                context.redirect('#/home');
             });
-    });
+    };
 
-    this.get('#/logout', function () {
+    const getLogout = context => {
         kinveyRequester.sendLogoutRequest()
             .then(() => {
-                window.sessionStorage.clear();
-                this.redirect('#/home');
+                sessionStorage.clear();
+                context.redirect('#/home');
             });
-    });
+    };
 
-    this.get('#/create_event', function () {
-        loadPage.call(this, hbsFilePaths.createEvent);
-    });
+    const getCreateEvent = context => {
+        loadPage.call(context, hbsFilePaths.createEvent);
+    };
 
-    this.post('#/create_event', function () {
-        const eventName = this.params.name;
-        const dateTime = this.params.dateTime;
-        const description = this.params.description;
-        const imageUrl = this.params.imageURL;
+    const postCreateEvent = context => {
+        const eventName = context.params.name;
+        const dateTime = context.params.dateTime;
+        const description = context.params.description;
+        const imageUrl = context.params.imageURL;
 
         const requestBody = {
             name: eventName,
@@ -162,31 +143,25 @@ const sammyApp = Sammy('#root', function () {
         };
 
         kinveyRequester.sendPostRequestWithAuthToken(requestBody);
-        this.redirect('#/home');
-    });
+        context.redirect('#/home');
+    };
 
-    /*
-     <a href="#/edit_event/{{currentEvent._id}}" class="btn btn-primary btn-lg">Edit the event</a>
-            <a href="#/close_event/{{currentEvent._id}}" class="btn btn-danger btn-lg">Close the event</a>
-        {{else}}
-            <a href="#/join_event/{{currentEvent._id}}" class="btn btn-info btn-lg">Join the event</a>
-     */
-    this.get('#/edit_event/:eventId', function () {
-        const eventId = this.params.eventId;
+    const getEventEdit = context => {
+        const eventId = context.params.eventId;
         kinveyRequester.sendGetRequestWithAuthToken()
             .then(response => response.json())
             .then(jsonData => {
                 const eventToEdit = jsonData.filter(ev => ev._id === eventId)[0];
-                loadPage.call(this, hbsFilePaths.edit, {eventToEdit});
+                loadPage.call(context, hbsFilePaths.edit, {eventToEdit});
             });
-    });
+    };
 
-    this.post('#/edit_event/:eventId', function () {
-        const eventId = this.params.eventId;
-        const newName = this.params.name;
-        const newDate = this.params.dateTime;
-        const newDescription = this.params.description;
-        const newImageUrl = this.params.imageURL;
+    const postEventEdit = context => {
+        const eventId = context.params.eventId;
+        const newName = context.params.name;
+        const newDate = context.params.dateTime;
+        const newDescription = context.params.description;
+        const newImageUrl = context.params.imageURL;
         const putBody = {
             name: newName,
             date: newDate,
@@ -200,20 +175,20 @@ const sammyApp = Sammy('#root', function () {
                 putBody.organizer = eventToEdit.organizer;
                 putBody['people_interested_in'] = eventToEdit['people_interested_in'];
                 kinveyRequester.sendPutRequestWithAuthTokenRecordId(putBody, eventId)
-                    .then(this.redirect('#/home'));
+                    .then(context.redirect('#/home'));
             });
-    });
+    };
 
-    this.get('#/close_event/:eventId', function () {
-        const eventId = this.params.eventId;
+    const getCloseEvent = context => {
+        const eventId = context.params.eventId;
         kinveyRequester.sendDeleteRequestWithAuthTokenRecordId(eventId)
             .then(() => {
-                this.redirect('#/home');
+                context.redirect('#/home');
             });
-    });
+    };
 
-    this.get('#/join_event/:eventId', function () {
-        const eventId = this.params.eventId;
+    const getJoinEvent = context => {
+        const eventId = context.params.eventId;
 
         kinveyRequester.sendGetRequestWithAuthToken()
             .then(response => response.json())
@@ -222,9 +197,42 @@ const sammyApp = Sammy('#root', function () {
                 const event = jsonData.filter(ev => ev._id === eventId)[0];
                 event['people_interested_in'] = Number(event['people_interested_in']) + 1;
                 kinveyRequester.sendPutRequestWithAuthTokenRecordId(event, eventId)
-                    .then(this.redirect('#/home'));
+                    .then(context.redirect('#/home'));
             });
-    });
-});
+    };
 
-(() => sammyApp.run('#/home'))();
+    const getProfile = context => {
+        const currentUsername = sessionStorage.getItem('username');
+        kinveyRequester.sendGetRequestWithAuthToken()
+            .then(response => response.json())
+            .then(jsonData => {
+                //kinda unreliable. If usernames were unique, maybe this would be fine. But it would be better with the users id.
+                const userEvents = jsonData.filter(ev => ev.organizer === currentUsername);
+                const pageContext = {
+                    username: currentUsername,
+                    numberOfEvents: userEvents.length,
+                    userEvents,
+                };
+
+                loadPage.call(context, hbsFilePaths.profile, pageContext);
+            });
+    };
+
+    return {
+        getHome,
+        getEventDetails,
+        getLogin,
+        postLogin,
+        getRegister,
+        postRegister,
+        getLogout,
+        getCreateEvent,
+        postCreateEvent,
+        getEventEdit,
+        postEventEdit,
+        getCloseEvent,
+        getJoinEvent,
+        getProfile,
+    }
+})();
+

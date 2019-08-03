@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c3cc71af-8a0a-47e1-81b6-d5d240c4b7d5" name="Default Changelist" comment="" />
+    <list default="true" id="c3cc71af-8a0a-47e1-81b6-d5d240c4b7d5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/task/scripts/app-controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/app-controller.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/handlebar-files/common/header.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/task/handlebar-files/common/header.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/handlebar-files/profile.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/task/handlebar-files/profile.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/kinvey-requester.js" beforeDir="false" afterPath="$PROJECT_DIR$/task/scripts/kinvey-requester.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -13,35 +21,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/task/scripts/app-controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/task/app-controller.js">
+        <entry file="file://$PROJECT_DIR$/task/scripts/controller-lib.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="226" column="7" lean-forward="true" selection-start-line="226" selection-start-column="7" selection-end-line="226" selection-end-column="7" />
+            <state relative-caret-position="144">
+              <caret line="8" column="57" lean-forward="true" selection-start-line="8" selection-start-column="57" selection-end-line="8" selection-end-column="57" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task/handlebar-files/forms/edit-event.hbs">
+        <entry file="file://$PROJECT_DIR$/task/handlebar-files/profile.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
-              <folding>
-                <element signature="n#style#0;n#div#5;n#form#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task/kinvey-requester.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="666">
-              <caret line="225" column="30" lean-forward="true" selection-start-line="225" selection-start-column="30" selection-end-line="225" selection-end-column="30" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+            <state relative-caret-position="18">
+              <caret line="1" column="34" lean-forward="true" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -49,17 +51,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/task/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="8" column="56" selection-start-line="8" selection-start-column="56" selection-end-line="8" selection-end-column="56" />
+            <state relative-caret-position="54">
+              <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task/handlebar-files/event-details.hbs">
+        <entry file="file://$PROJECT_DIR$/task/handlebar-files/home.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+            <state relative-caret-position="72">
+              <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -94,6 +96,7 @@
       <find>todo</find>
       <find>recordId</find>
       <find>/:</find>
+      <find>this</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -116,20 +119,21 @@
         <option value="$PROJECT_DIR$/task/handlebar-files/edit-event.hbs" />
         <option value="$PROJECT_DIR$/task/handlebar-files/sign-in.hbs" />
         <option value="$PROJECT_DIR$/task/handlebar-files/register.hbs" />
-        <option value="$PROJECT_DIR$/task/handlebar-files/profile.hbs" />
         <option value="$PROJECT_DIR$/task/handlebar-files/events.hbs" />
         <option value="$PROJECT_DIR$/task/requester.js" />
         <option value="$PROJECT_DIR$/task/handlebar-files/forms/sign-in.hbs" />
-        <option value="$PROJECT_DIR$/task/index.html" />
         <option value="$PROJECT_DIR$/task/handlebar-files/forms/register.hbs" />
         <option value="$PROJECT_DIR$/task/handlebar-files/home-logged-in.hbs" />
-        <option value="$PROJECT_DIR$/task/handlebar-files/common/header.hbs" />
         <option value="$PROJECT_DIR$/task/handlebar-files/forms/create-event.hbs" />
         <option value="$PROJECT_DIR$/task/handlebar-files/home.hbs" />
         <option value="$PROJECT_DIR$/task/handlebar-files/event-details.hbs" />
         <option value="$PROJECT_DIR$/task/handlebar-files/forms/edit-event.hbs" />
         <option value="$PROJECT_DIR$/task/kinvey-requester.js" />
+        <option value="$PROJECT_DIR$/task/index.html" />
         <option value="$PROJECT_DIR$/task/app-controller.js" />
+        <option value="$PROJECT_DIR$/task/handlebar-files/common/header.hbs" />
+        <option value="$PROJECT_DIR$/task/controller-lib.js" />
+        <option value="$PROJECT_DIR$/task/handlebar-files/profile.hbs" />
       </list>
     </option>
   </component>
@@ -155,7 +159,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -172,49 +175,19 @@
               <item name="exam-prep-1-uni-ent" type="b2602c69:ProjectViewProjectNode" />
               <item name="exam-prep-1-uni-ent" type="462c0819:PsiDirectoryNode" />
               <item name="task" type="462c0819:PsiDirectoryNode" />
-              <item name="handlebar-files" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="exam-prep-1-uni-ent" type="b2602c69:ProjectViewProjectNode" />
-              <item name="exam-prep-1-uni-ent" type="462c0819:PsiDirectoryNode" />
-              <item name="task" type="462c0819:PsiDirectoryNode" />
-              <item name="handlebar-files" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="exam-prep-1-uni-ent" type="b2602c69:ProjectViewProjectNode" />
-              <item name="exam-prep-1-uni-ent" type="462c0819:PsiDirectoryNode" />
-              <item name="task" type="462c0819:PsiDirectoryNode" />
-              <item name="handlebar-files" type="462c0819:PsiDirectoryNode" />
-              <item name="forms" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="exam-prep-1-uni-ent" type="b2602c69:ProjectViewProjectNode" />
-              <item name="exam-prep-1-uni-ent" type="462c0819:PsiDirectoryNode" />
-              <item name="task" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="exam-prep-1-uni-ent" type="b2602c69:ProjectViewProjectNode" />
-              <item name="exam-prep-1-uni-ent" type="462c0819:PsiDirectoryNode" />
-              <item name="task" type="462c0819:PsiDirectoryNode" />
-              <item name="screenshots" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="exam-prep-1-uni-ent" type="b2602c69:ProjectViewProjectNode" />
-              <item name="exam-prep-1-uni-ent" type="462c0819:PsiDirectoryNode" />
-              <item name="task" type="462c0819:PsiDirectoryNode" />
-              <item name="styles" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.6.0" />
     <property name="last_opened_file_path" value="C:/Program Files/nodejs/node.exe" />
@@ -225,6 +198,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Programming\GithubRepos\Softuni-JS-Apps\exams\exam-prep-1-uni-ent\task\scripts" />
       <recent name="E:\Programming\GithubRepos\Softuni-JS-Apps\exams\exam-prep-1-uni-ent\task\handlebar-files\common" />
       <recent name="E:\Programming\GithubRepos\Softuni-JS-Apps\exams\exam-prep-1-uni-ent\task\handlebar-files\forms" />
       <recent name="E:\Programming\GithubRepos\Softuni-JS-Apps\exams\exam-prep-1-uni-ent\task\handlebar-files" />
@@ -267,11 +241,13 @@
       <workItem from="1564638137305" duration="25967000" />
       <workItem from="1564722519193" duration="13276000" />
       <workItem from="1564814521497" duration="4105000" />
+      <workItem from="1564833163878" duration="889000" />
+      <workItem from="1564835655188" duration="3469000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47558000" />
+    <option name="totallyTimeSpent" value="51916000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -334,20 +310,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/task/handlebar-files/no-events.hbs" />
-    <entry file="file://$PROJECT_DIR$/task/handlebar-files/profile.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/task/images/events.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task/images/graduation-edit.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task/images/user.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/task/handlebar-files/forms/sign-in.hbs">
@@ -379,13 +342,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/task/handlebar-files/home-logged-out.hbs" />
-    <entry file="file://$PROJECT_DIR$/task/handlebar-files/common/header.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="16" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/task/handlebar-files/forms/create-event.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -393,30 +349,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task/handlebar-files/home.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/task/handlebar-files/forms/edit-event.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
-          <folding>
-            <element signature="n#style#0;n#div#5;n#form#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task/kinvey-requester.js">
+    <entry file="file://$PROJECT_DIR$/task/scripts/kinvey-requester.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
+        <state relative-caret-position="4050">
           <caret line="225" column="30" lean-forward="true" selection-start-line="225" selection-start-column="30" selection-end-line="225" selection-end-column="30" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/scripts/app-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
@@ -427,17 +380,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task/index.html">
+    <entry file="file://$PROJECT_DIR$/task/images/graduation-edit.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/images/404face.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/images/user.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/handlebar-files/profile.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="56" selection-start-line="8" selection-start-column="56" selection-end-line="8" selection-end-column="56" />
+        <state relative-caret-position="18">
+          <caret line="1" column="34" lean-forward="true" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task/app-controller.js">
+    <entry file="file://$PROJECT_DIR$/task/handlebar-files/common/header.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="226" column="7" lean-forward="true" selection-start-line="226" selection-start-column="7" selection-end-line="226" selection-end-column="7" />
+        <state relative-caret-position="270">
+          <caret line="15" column="69" selection-start-line="15" selection-start-column="69" selection-end-line="15" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/handlebar-files/home.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/scripts/controller-lib.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="57" lean-forward="true" selection-start-line="8" selection-start-column="57" selection-end-line="8" selection-end-column="57" />
         </state>
       </provider>
     </entry>
