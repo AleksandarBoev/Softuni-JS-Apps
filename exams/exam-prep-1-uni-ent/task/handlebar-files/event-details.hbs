@@ -1,0 +1,21 @@
+<div class="row event-details">
+    <div class="col-md-12 text-center overflow-hidden">
+
+        <img class="details-img"
+             src="{{currentEvent.image_url}}"/>
+        <div class="my-3 p-3">
+            <h2 class="display-5">{{currentEvent.name}}</h2>
+            <p class="infoType">Description:</p>
+            <p class="event-description">{{currentEvent.description}}</p>
+            <p class="infoType">Date: <small>{{currentEvent.date}}</small></p>
+            <p class="infoType">Peope interested in: <small>{{currentEvent.people_interested_in}}</small></p>
+            <p class="infoType">Organizer: <small>{{currentEvent.organizer}}</small></p>
+        </div>
+        {{#if isCreator}}
+            <a href="#/edit_event/{{currentEvent._id}}" class="btn btn-primary btn-lg">Edit the event</a>
+            <a href="#/close_event/{{currentEvent._id}}" class="btn btn-danger btn-lg">Close the event</a>
+        {{else}}
+            <a href="#/join_event/{{currentEvent._id}}" class="btn btn-info btn-lg">Join the event</a>
+        {{/if}}
+    </div>
+</div>
