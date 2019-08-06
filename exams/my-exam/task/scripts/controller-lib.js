@@ -10,7 +10,7 @@ const controllerLib = (() => {
         deleteOffer: fromHtmlToHbsFolderPath + 'other/delete-offer.hbs',
         editOffer: fromHtmlToHbsFolderPath + 'other/edit-offer.hbs',
         login: fromHtmlToHbsFolderPath + 'other/login.hbs',
-        notifications: fromHtmlToHbsFolderPath + 'other/notifications.hbs',
+        notifications: fromHtmlToHbsFolderPath + 'other/notificationsLib.hbs',
         offerDetails: fromHtmlToHbsFolderPath + 'other/offer-details.hbs',
         profile: fromHtmlToHbsFolderPath + 'other/profile.hbs',
         register: fromHtmlToHbsFolderPath + 'other/register.hbs',
@@ -22,10 +22,8 @@ const controllerLib = (() => {
             mainPartial: mainPartialPath,
             footerPartial: hbsFilePaths.footer,
         }).then(function () {
-            hbsContext.username = sessionStorage.getItem('username');
             hbsContext.authToken = sessionStorage.getItem('authToken');
-            hbsContext.numberOfPurchases = sessionStorage.getItem('numberOfPurchases'); //just for this exam
-            hbsContext.numberOfPurchases = sessionStorage.getItem('userId'); //just for this exam
+            hbsContext.userId = sessionStorage.getItem('userId'); //just for this exam
             this.partial(hbsFilePaths.pageTemplate, hbsContext); //hbs files will ALWAYS have access to current username and authToken
         });
     }
@@ -66,9 +64,7 @@ const controllerLib = (() => {
     };
 
     const postLogin = sammyContext => {
-        console.log('Trying to get the username!');
         const username = sammyContext.params.username;
-        console.log('Got the username!');
         const password = sammyContext.params.password;
 
         kinveyRequester.sendLoginRequest(username, password)
@@ -80,11 +76,8 @@ const controllerLib = (() => {
                 return response.json();
             })
             .then(responseData => {
-                console.log(responseData);
-                sessionStorage.setItem('username', responseData.username);
                 sessionStorage.setItem('authToken', responseData._kmd.authtoken);
                 sessionStorage.setItem('userId', responseData._id);
-                sessionStorage.setItem('numberOfPurchases', responseData.numberOfPurchases);
                 sammyContext.redirect('#/home');
             })
             .catch(error => {
@@ -177,7 +170,6 @@ const controllerLib = (() => {
             .then(response => response.json())
             .then(arrayOfOfferObjects => {
                 //"._acl.creator"
-                console.log(arrayOfOfferObjects);
                 let counter = 0;
                 arrayOfOfferObjects.map(currentOffer => {
                     const offerCreatorId = currentOffer._acl.creator;
@@ -223,7 +215,6 @@ const controllerLib = (() => {
 
     const postEdit = sammyContext => {
         const offerId = sammyContext.params.offerId;
-        console.log('Editing offer with id ' + offerId);
 
         kinveyRequester.sendGetRequestWithAuthToken()
             .then(response => response.json())
@@ -242,12 +233,9 @@ const controllerLib = (() => {
                     pictureUrl,
                 };
 
-                console.log('Validating object!');
                 if (!isValidObject(editedOffer)) {
                     return;
                 }
-
-                console.log('Object is valid!');
 
                 kinveyRequester.sendPutRequestWithAuthTokenRecordId(editedOffer, offerId)
                     .then(sammyContext.redirect('#/home'));
@@ -276,8 +264,29 @@ const controllerLib = (() => {
             })
     };
 
+    const buyProduct = sammyContext => {
+        kinveyRequester.sendGetRequestUsers()
+            .then(response => response.json())
+            .then(arrayOfUserObjects => {
+                const currentUserId = sessionStorage.getItem('userId');
+                const currentUser = arrayOfUserObjects.filter(u => u._id === currentUserId)[0];
+                currentUser.numberOfPurchases += 1;
+                kinveyRequester.sendPutRequestUser(currentUser, currentUserId)
+                    .then(() => {
+                        sammyContext.redirect('#/dashboard');
+                    })
+            });
+    };
+
     const getProfile = sammyContext => {
-        loadPage.call(sammyContext, hbsFilePaths.profile);
+        kinveyRequester.sendGetRequestUsers()
+            .then(response => response.json())
+            .then(arrayOfUserObjects => {
+                const userId = sammyContext.params.userId;
+                const user = arrayOfUserObjects.filter(u => u._id === userId)[0];
+                loadPage.call(sammyContext, hbsFilePaths.profile, {user});
+            }).then(() => {
+        });
     };
 
     return {
@@ -296,6 +305,7 @@ const controllerLib = (() => {
         getDeleteOffer,
         postDeleteOffer,
         getProfile,
+        buyProduct,
     }
 })();
 

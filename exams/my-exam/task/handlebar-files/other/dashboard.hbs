@@ -36,7 +36,8 @@
                 {{#if isOwnedByCurrentLoggedInUser}}
                     <a href='#/delete_offer/{{_id}}' class="btn-danger btn">Delete</a>
                     <a href='#/edit_offer/{{_id}}' class="btn-info btn">Edit</a>
-                    <!--                BONUS (Not-Required)<a href="" class="btn-warning btn">Buy</a>BONUS (Not-Required)-->
+                {{else}}
+                    <a href="#/buy_product" class="btn-warning btn">Buy</a>
                 {{/if}}
             </td>
         </tr>

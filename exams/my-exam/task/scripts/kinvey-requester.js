@@ -1,11 +1,11 @@
 /*
-    Easy to use requester, based on the PaaS "Kinvey". Unreliable in terms of security
+    Easy to use requester, based on the BaaS "Kinvey". Unreliable in terms of security
 
     Most functions have default values for parameters for ease of use. To change them, see "appCredentials" and "defaultUrls".
-    Default behaviour of requests, using "authToken", relies on sessionStorage.getItem('authToken')
+    Default behaviour of requests, using "authToken", rely on sessionStorage.getItem('authToken')
  */
-const kinveyRequester = (() => {
-    const appCredentials = { //TODO
+const kinveyRequester = (() => { //TODO
+    const appCredentials = {
         appKey: 'kid_SkjdzCRzH',
         appSecret: 'd173dc100fb842f2911f912cf795a352',
         collectionName: 'offers',
@@ -17,6 +17,7 @@ const kinveyRequester = (() => {
         putUrl: recordId => `https://baas.kinvey.com/appdata/${appCredentials.appKey}/${appCredentials.collectionName}/${recordId}`,
         deleteUrl: recordId => `https://baas.kinvey.com/appdata/${appCredentials.appKey}/${appCredentials.collectionName}/${recordId}`,
         registerUrl: `https://baas.kinvey.com/user/${appCredentials.appKey}/`,
+        updateUserUrl: userId => `https://baas.kinvey.com/user/${appCredentials.appKey}/${userId}`,
         loginUrl: `https://baas.kinvey.com/user/${appCredentials.appKey}/login`,
         logoutUrl: `https://baas.kinvey.com/user/${appCredentials.appKey}/_logout`,
     };
@@ -264,6 +265,28 @@ const kinveyRequester = (() => {
             return fetch(url, {
                 method: 'POST',
                 headers: buildAuthTokenHeadersObj(authToken),
+            });
+        },
+
+        sendGetRequestUsers: (authToken, url = defaultUrls.registerUrl) => {
+            return fetch(url, {
+                method: 'GET',
+                headers: buildAuthTokenHeadersObj(),
+            });
+        },
+
+        /**
+         *
+         * @param updatedUser {Object}
+         * @param userId {String}
+         * @param authToken {String}
+         * @returns {Promise<Response>}
+         */
+        sendPutRequestUser: (updatedUser, userId, authToken) => {
+            return fetch(defaultUrls.updateUserUrl(userId), {
+                method: 'PUT',
+                headers: buildAuthTokenHeadersObj(),
+                body: JSON.stringify(updatedUser),
             });
         },
     };

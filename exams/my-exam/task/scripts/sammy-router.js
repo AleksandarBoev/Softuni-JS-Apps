@@ -25,6 +25,9 @@ const sammyApp = Sammy('#root', function () {
     this.post('#/delete_offer/:offerId', controllerLib.postDeleteOffer);
 
     this.get('#/profile/:userId', controllerLib.getProfile);
+
+    this.get('#/buy_product', controllerLib.buyProduct);
+
 });
 
 (() => sammyApp.run('#/home'))();
